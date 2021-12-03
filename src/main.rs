@@ -1,3 +1,6 @@
+mod matrix;
+
 fn main() {
-    println!("Hello, world!");
+    let m = matrix::Matrix::new(1, 10);
+    println!("{}", m)
 }
