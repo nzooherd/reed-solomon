@@ -1,4 +1,5 @@
 use std::fmt;
+use ::galois;
 
 pub struct Matrix {
     row: u32,
@@ -44,14 +45,12 @@ impl Matrix {
             for j in 0..right.column {
                 let mut value: i8 = 0;
                 for k in 0..right.row {
-                    value += self.get(i, k) * right.get(k, j)
+                    value += galois.multiply(self.get(i, k), right.get(k, j));
                 }
                 (&mut result).set(i, j, value)
             }
         }
-
         result
-
     }
 
 
