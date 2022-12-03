@@ -9,16 +9,9 @@ EC 的原理是数学中的矩阵运算，设想存在一份原数据: *"abcdefg
 
 假设 $(N+M) = 4 + 2$，我们要将原数据切分为 4 份，用矩阵表示如下，每行代表一份数据
 
-$$
-\begin{bmatrix}
-   a & b & c & d \\
-   e & f & g & h \\ 
-   i & j & k & l \\ 
-   m & n & o & p
-\end{bmatrix}
-$$
 
 如果我们用另一个 $6 \times 4$ 矩阵和原始数据相乘:
+
 
 $$
 \begin{bmatrix}
@@ -36,7 +29,7 @@ $$
    i & j & k & l \\ 
    m & n & o & p \\ 
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
    a & b & c & d \\
    e & f & g & h \\ 
@@ -48,6 +41,7 @@ $$
 $$
 
 这样就生成了两份新数据，假设我们丢失了两份数据 ~~*i j k l*~~ 和 ~~*m n o p*~~，现有数据变为
+
 $$
 \begin{bmatrix}
    a & b & c & d \\
@@ -58,6 +52,7 @@ $$
 $$
 
 因为
+
 $$
 \begin{bmatrix}
    01 & 00 & 00 & 00 \\
@@ -72,7 +67,7 @@ $$
    i & j & k & l \\ 
    m & n & o & p \\ 
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
    a & b & c & d \\
    e & f & g & h \\ 
@@ -82,6 +77,7 @@ $$
 $$
 
 如果我们同时乘一个逆矩阵
+
 $$
 \begin{bmatrix}
    01 & 00 & 00 & 00 \\
@@ -103,7 +99,7 @@ $$
    i & j & k & l \\ 
    m & n & o & p \\ 
 \end{bmatrix}
-\\ =
+\ =
 \begin{bmatrix}
    01 & 00 & 00 & 00 \\
    00 & 01 & 00 & 00 \\ 
@@ -120,6 +116,7 @@ $$
 $$
 
 消去单元矩阵有
+
 $$
 \begin{bmatrix}
    a & b & c & d \\
@@ -127,7 +124,7 @@ $$
    i & j & k & l \\ 
    m & n & o & p \\ 
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
    01 & 00 & 00 & 00 \\
    00 & 01 & 00 & 00 \\ 
@@ -171,20 +168,24 @@ $$
 **Vandermonde Matrix 大概率是可逆的!!**
 
 而要求生成矩阵 
+
+
 $$
-V = 
+V 
+\= 
 \begin{vmatrix}
 01 & 00 & 00 & \dots & 00 \\ 
 00 & 01 & 00 & \dots & 00 \\
 00 & 00 & 01 & \dots & 00 \\
 \vdots & \vdots & \vdots & \ddots &\vdots \\
 k_0 & k_1 & k_2 & \dots & k_{k-1} \\
-\vdots & \vdots & \vdots & \ddots &\vdots \\
-\{k+m-1\}_0 & \{k+m-1\}_1 & \{k+m-1\}_ 2& \dots & \{k+m-1\}_{k-1}
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+\{k+m-1\}_0  & \{k+m-1\}_1 & \{k+m-1\}_2 & \dots & \{k+m-1\}_k-1 \\ 
 \end{vmatrix} 
 $$
 
 可以根据 Vandermonde Matrix 得出
+
 $$
 V = 
 \begin{vmatrix}
@@ -217,14 +218,14 @@ $$
 * 分配律: $a \otimes (b \oplus c) = (a \otimes b) + (a \otimes c)$
 * 存在 $\oplus$ 和 $\otimes$ 单元: 
    对于一个 Field *F*
-   * $\exists~a \in F, \forall~b \in F,  a \oplus b = b$ 
-   * $\exists~x \in F, \forall~y \in F,  x \otimes y = y$ 
+   * $\exists a \in F, \forall b \in F, a \oplus b = b$
+   * $\exists x \in F, \forall y \in F, x \otimes y = y$
 * 存在 $\oplus$ 和 $\otimes$ 逆元:
    假设 *a* 和 *x* 分别是 $\oplus$ 和 $\otimes$ 单元，对于 Field *F*
-   * $\forall~b \in F, \exists~c \in F，b \oplus c = a$
-   * $\forall~y \in F \land y \neq a, \exists~z \in F，y \otimes z = x$
+   * $\forall b \in F, \exists c \in F，b \oplus c = a$
+   * $\forall y \in F \land y \neq a, \exists z \in F，y \otimes z = x$
 
-常见的 Field 如 *有理数域*, *实数域*，*复数域*，$\oplus$ 和 $\otimes$ 分别对应 $+$ 和 $\times$， 这些域内元素个数都是无限的。而**具有有限个元素**的域就是*有限域*，又被称为*Galois Field*(纪念埃瓦里斯特·伽罗瓦)。
+常见的 Field 如 *有理数域*, *实数域*，*复数域*，其中 $\oplus$ 和 $\otimes$分别对应 $+$ 和 $\times$， 这些域内元素个数都是无限的。而**具有有限个元素**的域就是*有限域*，又被称为*Galois Field*(纪念埃瓦里斯特·伽罗瓦)。
 
 一个简单的有限域是 $(0, 1, 2)$，定义 $\oplus$ 和 $\otimes$ 如下: 结合上文中对域的定义，可以知道 $\oplus$ 和 $\otimes$ 是符合域的所有性质的。
 
@@ -251,7 +252,7 @@ $\oplus$|0  |1  |...|255|──|$\otimes$|0  |1  |...|255
    1. 首先将元素映射为一个多项式。假设要计算 $23 \otimes 45$， 23 写成二进制的格式为 $0b10111$，转化为多项式就是 $x^4+x^2+x^1+x^0$，45 二进制格式为 $x^5+x^3+x^2+x^0$
 
    2. 执行多项式相乘 
-   $$23 \otimes 45 \\= (x^4+x^2+x^1+x^0) \times (x^5+x^3+x^2+x^0) \\= x^9 + 2x^7 + x^6 + 2x^5 + 2x^4 + x^3 + 2x^2 + 1$$
+   $$23 \otimes 45 \= (x^4+x^2+x^1+x^0) \times (x^5+x^3+x^2+x^0) \= x^9 + 2x^7 + x^6 + 2x^5 + 2x^4 + x^3 + 2x^2 + 1$$
 
    3. 将相乘结果对 $x^8+x^4+x^3+x^2+1$ 做 *特殊的取模* 运算。多项式取模采用 *长除法*，长除法后的模为 $2x^7+2x^6+x^5+2x^4+x^3+2x^2+1$。但是要对结果做进一步变换:
       * 将系数为负数的项式直接对系数取反。(这个例子中没负数，就不举例了)
@@ -264,8 +265,8 @@ $\oplus$|0  |1  |...|255|──|$\otimes$|0  |1  |...|255
 但是如何证明除 *0* 之外每个元素都有乘法逆元？
 
 根据上图的 $mod$ 定义，
-$$x^{113} \mod (x^8+x^4+x^3+x^2+1) \\= (x^4+x^2+x^1+x^0) \mod (x^8+x^4+x^3+x^2+1)$$
-因此认为在 $\otimes$ 的语义下， $x^{113} = (x^4+x^2+x^1+x^0) = 23$。
+$$x^{113} \mod (x^8+x^4+x^3+x^2+1) \= (x^4+x^2+x^1+x^0) \mod (x^8+x^4+x^3+x^2+1)$$
+因此认为在 $\otimes$ 的语义下， $x^{113} \= (x^4+x^2+x^1+x^0) = 23$。
 
 对于集合$GF(256)$ $F$, 存在推论:
 1. $$\forall~a \in F \land a \neq 0, \exists ~k \in F , x^k = a$$
@@ -278,7 +279,7 @@ $$x^{113} \mod (x^8+x^4+x^3+x^2+1) \\= (x^4+x^2+x^1+x^0) \mod (x^8+x^4+x^3+x^2+1
 如果用代码按上述流程实现 $\otimes$，复杂度是很高的，首先是多项式相乘，然后取模。真正实践过程中，往往采用查表的方式。我们已经知道
 $$\forall~a \in F \land a \neq 0, \exists ~k \in F , x^k = a$$
 所以
-$$a \otimes b \\= x^{log_x^a} \times x^{log_x^b} \\= x^{log_x^a+log_x^b}$$
+$$a \otimes b \= x^{log_x^a} \times x^{log_x^b} \= x^{log_x^a+log_x^b}$$
 
 因此我们只需知道 $\forall~k \in F$, $log_x^k$ 和 $x^k$ 的结果就可以很简单的计算 $\otimes$。
 由于 $GF(256)$ 元素只有 256 个，完全可以通过打表的方式一一列出。
